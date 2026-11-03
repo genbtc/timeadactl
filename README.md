@@ -13,16 +13,45 @@ make check
 
 ## Use
 
+## Help
+
+Usage:
+```
+./timeadactl --help
+Usage: ./timeadactl [-n] [-s server] [-p port]
+  -n          query and display time, but do not set the clock
+  -s server   NTP server (default: pool.ntp.org)
+  -p port     UDP port (default: 123)
+  -h          show this help
+(also accepts long options, "--dry-run, --server, --port, --help")
+```
+
 Preview the calculated time without changing the clock: 
 
 ```sh
 ./timeadactl --dry-run
+NTP server: pool.ntp.org (NTPv4, stratum 2)
+Offset:    +31.790850 seconds
+Delay:      0.077399 seconds
+UTC time:   2026-11-03T23:40:25.595728688Z
+Dry run: system clock was not changed.
 ```
 
 Set the system clock using the default server (`pool.ntp.org`):
 
 ```sh
-sudo ./timeadctl
+./timeadactl
+NTP server: pool.ntp.org (NTPv4, stratum 2)
+Offset:    +31.791382 seconds
+Delay:      0.078044 seconds
+UTC time:   2026-11-03T23:40:41.960139839Z
+timeadactl: clock_settime: Operation not permitted (requires root or CAP_SYS_TIME)
+```
+```
+./sudo timeadactl
+...
+System clock updated.
+
 ```
 
 Choose another server or UDP port:
@@ -32,6 +61,7 @@ sudo ./timeadactl --server time.google.com
 sudo ./timeadactl --server 127.0.0.1 --port 123
 ```
 
+Options:
 `-n` / `--dry-run` displays the result without setting the clock. `-s HOST` /
 `--server HOST` selects the server. `-p PORT` / `--port PORT` sets the UDP port
 (default `123`). `-h` / `--help` displays usage.
