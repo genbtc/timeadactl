@@ -281,7 +281,7 @@ main(int argc, char **argv)
     }
 
     (void)printf("NTP server: %s (NTPv%u, stratum %u)\n", host, s.version, s.stratum);
-    (void)printf("Offset:    %+r.6Lf seconds\n", offset);
+    (void)printf("Offset:    %+.6Lf seconds\n", offset);
     (void)printf("Delay:      %.6Lf seconds\n", delay);
     (void)printf("UTC time:   %s.%09ldZ\n", stamp, target.tv_nsec);
     if (dry_run) {
